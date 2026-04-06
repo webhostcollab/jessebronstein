@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jesse Bronstein — Cinematographer</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50' y='72' font-family='sans-serif' font-size='52' font-weight='700' fill='white' text-anchor='middle'>JB</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Roboto+Mono:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <iframe
+                src="https://player.vimeo.com/video/1100870581?h=c44dcf017b&background=1&autoplay=1&loop=1&muted=1&quality=1080p"
+                frameborder="0"
+                allow="autoplay; fullscreen"
+                allowfullscreen
+            ></iframe>
+        </div>
+        <div class="hero-bar" id="hero-name">
+            <a class="hero-side hero-left" href="#work">Work</a>
+            <div class="hero-center">
+                <span>Jesse</span>
+                <span>Bronstein</span>
+            </div>
+            <a class="hero-side hero-right" href="#about">Info</a>
+        </div>
+    </section>
+
+    <!-- Wrapper so sticky works across all content -->
+    <div class="sticky-wrapper">
+
+
+    <!-- WORK -->
+    <main class="work-section" id="work">
+
+        <div class="filter-bar">
+            <div class="filter-links">
+                <a href="#" class="filter-link active" data-filter="all">Selected</a>
+                <a href="#" class="filter-link" data-filter="commercial">Commercial</a>
+                <a href="#" class="filter-link" data-filter="narrative">Narrative</a>
+                <a href="#" class="filter-link" data-filter="music-video">Music Video</a>
+            </div>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            </button>
+        </div>
+
+        <div class="project-feed">
+
+            <article class="project" data-category="narrative" data-selected data-title="Ovejas Y Lobos"
+                data-vimeo="1101244533"
+                data-stills="stills/ovejas_1.jpg,stills/ovejas_2.jpg,stills/ovejas_3.jpg,stills/ovejas_4.jpg,stills/ovejas_5.jpg,stills/ovejas_6.jpg,stills/ovejas_7.jpg,stills/ovejas_8.jpg">
+                <div class="project-stills">
+                    <img src="stills/ovejas_1.jpg" alt="Ovejas Y Lobos" loading="lazy">
+                    <img src="stills/ovejas_2.jpg" alt="Ovejas Y Lobos" loading="lazy">
+                    <img src="stills/ovejas_3.jpg" alt="Ovejas Y Lobos" loading="lazy">
+                    <span class="project-title">Ovejas Y Lobos</span>
+                </div>
+            </article>
+
+            <article class="project" data-category="commercial" data-selected data-title="Corriendo Conmigo"
+                data-vimeo="800341334"
+                data-stills="stills/adidas_6.jpg,stills/adidas_15.jpg,stills/adidas_16.jpg">
+                <div class="project-stills">
+                    <img src="stills/adidas_6.jpg" alt="Corriendo Conmigo" loading="lazy">
+                    <img src="stills/adidas_15.jpg" alt="Corriendo Conmigo" loading="lazy">
+                    <img src="stills/adidas_16.jpg" alt="Corriendo Conmigo" loading="lazy">
+                    <span class="project-title">Corriendo Conmigo</span>
+                </div>
+            </article>
+
+            <article class="project" data-category="commercial" data-selected data-title="T-Mobile"
+                data-vimeo="769262046"
+                data-stills="stills/meta_7.jpg,stills/meta_8.jpg,stills/meta_9.jpg">
+                <div class="project-stills">
+                    <img src="stills/meta_7.jpg" alt="T-Mobile" loading="lazy">
+                    <img src="stills/meta_8.jpg" alt="T-Mobile" loading="lazy">
+                    <img src="stills/meta_9.jpg" alt="T-Mobile" loading="lazy">
+                    <span class="project-title">T-Mobile</span>
+                </div>
+            </article>
+
+            <article class="project" data-category="music-video" data-selected data-title="Peadbo"
+                data-vimeo="868457726"
+                data-stills="stills/peadbo_1.jpg,stills/peadbo_2.jpg,stills/peadbo_3.jpg,stills/peadbo_4.jpg,stills/peadbo_5.jpg,stills/peadbo_6.jpg,stills/peadbo_7.jpg,stills/peadbo_8.jpg,stills/peadbo_9.jpg">
+                <div class="project-stills">
+                    <img src="stills/peadbo_1.jpg" alt="Peadbo" loading="lazy">
+                    <img src="stills/peadbo_2.jpg" alt="Peadbo" loading="lazy">
+                    <img src="stills/peadbo_3.jpg" alt="Peadbo" loading="lazy">
+                    <span class="project-title">Peadbo</span>
+                </div>
+            </article>
+
+            <article class="project" data-category="commercial" data-selected data-title="Adidas / Snipes"
+                data-vimeo="831665298" data-vimeo-hash="b415e5a128"
+                data-stills="stills/adidas_6.jpg,stills/adidas_15.jpg,stills/adidas_16.jpg">
+                <div class="project-stills">
+                    <img src="stills/nike_snipes_4.jpg" alt="Adidas / Snipes" loading="lazy">
+                    <img src="stills/nike_snipes_5.jpg" alt="Adidas / Snipes" loading="lazy">
+                    <img src="stills/nike_snipes_6.jpg" alt="Adidas / Snipes" loading="lazy">
+                    <span class="project-title">Adidas / Snipes</span>
+                </div>
+            </article>
+
+
+            <article class="project" data-category="music-video" data-selected data-title="Venom In The Sky"
+                data-vimeo="806789060" data-vimeo-hash="46792153c2"
+                data-stills="stills/meta_19.jpg,stills/meta_20.jpg,stills/meta_21.jpg">
+                <div class="project-stills">
+                    <img src="stills/meta_19.jpg" alt="Venom In The Sky" loading="lazy">
+                    <img src="stills/meta_20.jpg" alt="Venom In The Sky" loading="lazy">
+                    <img src="stills/meta_21.jpg" alt="Venom In The Sky" loading="lazy">
+                    <span class="project-title">Venom In The Sky</span>
+                </div>
+            </article>
+
+            <article class="project" data-category="commercial" data-selected data-title="Meta"
+                data-vimeo="1166785411" data-vimeo-hash="543193ee4e"
+                data-vimeo2="1166783591" data-vimeo2-hash="c4fe84d06c"
+                data-stills="stills/meta_1.jpg,stills/meta_2.jpg,stills/meta_3.jpg,stills/meta_4.jpg,stills/meta_5.jpg,stills/meta_6.jpg,stills/meta_7.jpg,stills/meta_8.jpg,stills/meta_9.jpg,stills/meta_10.jpg,stills/meta_11.jpg,stills/meta_12.jpg,stills/meta_13.jpg,stills/meta_14.jpg,stills/meta_15.jpg,stills/meta_16.jpg,stills/meta_17.jpg,stills/meta_18.jpg,stills/meta_19.jpg,stills/meta_20.jpg,stills/meta_21.jpg,stills/meta_22.jpg">
+                <div class="project-stills">
+                    <img src="stills/meta_1.jpg" alt="Meta" loading="lazy">
+                    <img src="stills/meta_2.jpg" alt="Meta" loading="lazy">
+                    <img src="stills/meta_3.jpg" alt="Meta" loading="lazy">
+                    <span class="project-title">Meta</span>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <!-- ABOUT / INFO -->
+    <section class="about-section" id="about">
+        <div class="about-bio-col">
+            <h3 class="about-section-heading">About</h3>
+            <p class="about-bio">Jesse Bronstein is a New York-based cinematographer with over eight years of experience in narrative, commercial, and music video work. Originally from the East Village, Jesse began his career as an actor on Broadway before studying opera at Manhattan School of Music and ultimately pursuing filmmaking at Hunter College.</p>
+            <p class="about-bio">His work spans major brands including Nike, Adidas, Meta, The North Face, Uber, T-Mobile, and JP Morgan. His narrative work has screened at Clermont-Ferrand, Palm Springs, Raindance, and DokuFest, and received a Vimeo Staff Pick.</p>
+            <h3 class="about-section-heading" style="margin-top: 24px;">Contact</h3>
+            <div class="about-contact-lines">
+                <a class="about-email" href="mailto:bronsteinjesse@gmail.com">bronsteinjesse@gmail.com</a>
+            </div>
+        </div>
+        <div class="about-gear-accordion">
+            <h3 class="about-section-heading">Equipment</h3>
+            <details class="gear-group">
+                <summary class="about-col-heading">Alexa Mini LF</summary>
+                <ul class="gear-list">
+                    <li>1x Arri Alexa Mini LF</li>
+                    <li>1x PL Mount</li>
+                    <li>1x EF Mount</li>
+                    <li>1x Arri Alexa Mini LF EVF</li>
+                    <li>2x EVF Cable</li>
+                    <li>1x Arri EVF Bracket</li>
+                    <li>1x Arri QR Gold Mount Plate</li>
+                    <li>1x Arri Top Handle</li>
+                    <li>1x iPad Mini</li>
+                    <li>1x Arri Audio - Line Out Cable</li>
+                    <li>1x Wooden Camera A-Box</li>
+                    <li>1x DC Power Cable</li>
+                    <li>1x Pelican 1610 w/ Padded Dividers</li>
+                    <li>3x 1 TB Codex Cards</li>
+                    <li>1x USBC Codex Reader</li>
+                    <li>8x 150w Gold Mount Batteries</li>
+                    <li>6x 98w Gold Mount Batteries</li>
+                    <li>1x Nano Quad Charger</li>
+                    <li>2x Dual Chargers</li>
+                    <li>1x Sachtler Aktiv 18 Tripod</li>
+                </ul>
+            </details>
+            <details class="gear-group">
+                <summary class="about-col-heading">Nikon AIS Lenses</summary>
+                <ul class="gear-list">
+                    <li>15mm F3.5</li>
+                    <li>16mm F2.8 Fisheye</li>
+                    <li>18mm F3.5</li>
+                    <li>20mm F2.8</li>
+                    <li>24mm F2</li>
+                    <li>28mm F2</li>
+                    <li>35mm F1.4</li>
+                    <li>50mm F1.4</li>
+                    <li>55mm F2.8 Macro</li>
+                    <li>58mm F1.2</li>
+                    <li>85mm F1.4</li>
+                    <li>50-300mm F4 Zoom</li>
+                </ul>
+            </details>
+            <details class="gear-group">
+                <summary class="about-col-heading">Nisi Athena PL Lenses</summary>
+                <ul class="gear-list">
+                    <li>14mm F2.4</li>
+                    <li>25mm F1.9</li>
+                    <li>35mm F1.9</li>
+                    <li>40mm F1.9</li>
+                    <li>50mm F1.9</li>
+                    <li>85mm F1.9</li>
+                </ul>
+            </details>
+            <details class="gear-group">
+                <summary class="about-col-heading">Teradek System</summary>
+                <ul class="gear-list">
+                    <li>2x SmallHD Indie 7 Bolt 4k Gold Mount</li>
+                    <li>1x Teradek Bolt 4k LT 750 Transmitter</li>
+                    <li>1x Teradek Bolt 4k LT 750 Receiver</li>
+                    <li>1x Teradek ACE 750 Receiver</li>
+                    <li>1x 19" Atmos Sumo Monitor</li>
+                    <li>2x Rolling Stand</li>
+                    <li>1x Pelican 1610 w/Trekpak</li>
+                </ul>
+            </details>
+            <details class="gear-group">
+                <summary class="about-col-heading">Wireless Comm System</summary>
+                <ul class="gear-list">
+                    <li>1x Main Headset</li>
+                    <li>8x Remote Headsets</li>
+                    <li>18x Batteries</li>
+                    <li>1x 9-Slot Battery Charger</li>
+                </ul>
+            </details>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <span class="footer-left">&copy; 2026 Jesse Bronstein</span>
+        <span class="footer-center">Cinematographer &mdash; New York</span>
+        <div class="footer-right">
+            <a href="mailto:bronsteinjesse@gmail.com" class="footer-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+            </a>
+            <a href="https://www.instagram.com/jesse.bronstein" target="_blank" rel="noopener" class="footer-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+        </div>
+    </footer>
+
+    </div><!-- end sticky-wrapper -->
+
+    <!-- OVERLAY -->
+    <div class="overlay" id="overlay">
+        <div class="overlay-header">
+            <button class="overlay-header-side" id="overlay-close">Work</button>
+            <div class="overlay-header-center" id="overlay-home">
+                <span>Jesse</span>
+                <span>Bronstein</span>
+            </div>
+            <a class="overlay-header-side overlay-header-right" href="#about" id="overlay-info">Info</a>
+        </div>
+        <div class="overlay-body">
+            <div class="overlay-sidebar">
+                <div class="overlay-filter-nav" id="overlay-filters">
+                    <button class="overlay-filter-item active" data-filter="all">Selected</button>
+                    <button class="overlay-filter-item" data-filter="commercial">Commercial</button>
+                    <button class="overlay-filter-item" data-filter="narrative">Narrative</button>
+                    <button class="overlay-filter-item" data-filter="music-video">Music Video</button>
+                </div>
+                <div class="overlay-nav" id="overlay-nav"></div>
+            </div>
+            <div class="overlay-main" id="overlay-main">
+                <div class="overlay-video-wrap" id="overlay-video-wrap">
+                    <div class="overlay-video" id="overlay-video"></div>
+                </div>
+                <div class="overlay-bar">
+                    <span class="overlay-title" id="overlay-title"></span>
+                </div>
+                <div class="overlay-gallery" id="overlay-gallery"></div>
+                <div class="overlay-bottom-pad"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

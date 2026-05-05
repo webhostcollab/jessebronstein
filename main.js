@@ -153,34 +153,45 @@ function buildOverlayNav(activeProject) {
             ? p.hasAttribute('data-selected')
             : p.dataset.category === activeFilter;
         if (!show) return;
+
         const btn = document.createElement('button');
         btn.className = 'overlay-nav-item';
         if (p === activeProject) btn.classList.add('is-active');
 
-        const top = document.createElement('span');
-        top.className = 'overlay-nav-title';
-        top.textContent = p.dataset.title.split('—')[0].trim();
+        // Hero 2 = second image in stills list
+        const hero2 = p.dataset.stills.split(',')[1]?.trim() || p.dataset.stills.split(',')[0].trim();
+        const img = document.createElement('img');
+        img.src = hero2;
+        img.alt = p.dataset.title;
+        img.loading = 'lazy';
 
-        const sub = document.createElement('span');
-        sub.className = 'overlay-nav-subtitle';
-        sub.textContent = p.dataset.subtitle || '';
+        const label = document.createElement('span');
+        label.className = 'overlay-nav-label';
+        label.textContent = p.dataset.title;
 
-        btn.appendChild(top);
-        if (p.dataset.subtitle) btn.appendChild(sub);
+        btn.appendChild(img);
+        btn.appendChild(label);
         btn.addEventListener('click', () => openProject(p));
         overlayNav.appendChild(btn);
     });
 }
 
-// Overlay filters
+// Overlay filter dropdown
+const filterNav      = document.getElementById('overlay-filters');
+const filterToggle   = document.getElementById('overlay-filter-toggle');
+const filterLabel    = document.getElementById('overlay-filter-label');
+
+filterToggle.addEventListener('click', () => {
+    filterNav.classList.toggle('is-open');
+});
+
 document.querySelectorAll('.overlay-filter-item').forEach(btn => {
     btn.addEventListener('click', () => {
         document.querySelectorAll('.overlay-filter-item').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        const activeProject = document.querySelector('.overlay-nav-item.is-active');
-        const activeName = activeProject ? activeProject.textContent : null;
-        const match = allProjects.find(p => p.dataset.title === activeName);
-        buildOverlayNav(match || null);
+        filterLabel.textContent = btn.textContent;
+        filterNav.classList.remove('is-open');
+        buildOverlayNav(null);
     });
 });
 

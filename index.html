@@ -295,10 +295,16 @@
         <div class="overlay-body">
             <div class="overlay-sidebar">
                 <div class="overlay-filter-nav" id="overlay-filters">
-                    <button class="overlay-filter-item active" data-filter="all">Selected</button>
-                    <button class="overlay-filter-item" data-filter="commercial">Commercial</button>
-                    <button class="overlay-filter-item" data-filter="narrative">Narrative</button>
-                    <button class="overlay-filter-item" data-filter="music-video">Music Video</button>
+                    <button class="overlay-filter-toggle" id="overlay-filter-toggle">
+                        <span id="overlay-filter-label">Selected</span>
+                        <span class="overlay-filter-plus" id="overlay-filter-plus">+</span>
+                    </button>
+                    <div class="overlay-filter-dropdown" id="overlay-filter-dropdown">
+                        <button class="overlay-filter-item active" data-filter="all">Selected</button>
+                        <button class="overlay-filter-item" data-filter="commercial">Commercial</button>
+                        <button class="overlay-filter-item" data-filter="narrative">Narrative</button>
+                        <button class="overlay-filter-item" data-filter="music-video">Music Video</button>
+                    </div>
                 </div>
                 <div class="overlay-nav" id="overlay-nav"></div>
             </div>

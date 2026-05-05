@@ -406,6 +406,12 @@ html.light-mode .icon-moon { display: block; }
     height: var(--header-h);
     padding: 0 var(--gutter);
     flex-shrink: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: transparent;
 }
 
 .overlay-header-side {
@@ -462,18 +468,52 @@ html.light-mode .icon-moon { display: block; }
     height: 100%;
     overflow-y: auto;
     scrollbar-width: none;
-    padding: 20px var(--gutter);
+    padding: calc(var(--header-h) + 20px) var(--gutter) 20px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
 }
 .overlay-sidebar::-webkit-scrollbar { display: none; }
 
+/* ── Overlay filter dropdown ─────────────────────────── */
 .overlay-filter-nav {
+    position: relative;
+}
+
+.overlay-filter-toggle {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg);
+    padding: 0;
+}
+.overlay-filter-plus {
+    font-size: 0.8rem;
+    font-weight: 300;
+    line-height: 1;
+    transition: transform 0.2s ease;
+    display: inline-block;
+}
+.overlay-filter-nav.is-open .overlay-filter-plus {
+    transform: rotate(45deg);
+}
+
+.overlay-filter-dropdown {
+    display: none;
+    flex-direction: column;
     gap: 0;
+    padding-top: 8px;
+}
+.overlay-filter-nav.is-open .overlay-filter-dropdown {
+    display: flex;
 }
 
 .overlay-filter-item {
@@ -488,16 +528,13 @@ html.light-mode .icon-moon { display: block; }
     text-transform: uppercase;
     color: var(--muted);
     text-align: left;
-    padding: 6px 10px 6px 0;
+    padding: 5px 0;
     transition: color 0.2s;
 }
-.overlay-filter-item:first-child { padding-left: 0; }
 .overlay-filter-item:hover { color: var(--fg); }
-.overlay-filter-item.active {
-    color: var(--fg);
-    font-weight: 400;
-}
+.overlay-filter-item.active { display: none; } /* hide current in dropdown */
 
+/* ── Overlay thumbnail nav ───────────────────────────── */
 .overlay-nav {
     display: flex;
     flex-direction: column;
@@ -505,42 +542,55 @@ html.light-mode .icon-moon { display: block; }
 }
 
 .overlay-nav-item {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
+    position: relative;
+    display: block;
     background: none;
     border: none;
     cursor: pointer;
-    text-align: left;
-    padding: 6px 0;
-    transition: color 0.2s;
-    color: var(--muted);
+    padding: 0;
+    overflow: hidden;
 }
-.overlay-nav-title {
+.overlay-nav-item img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    display: block;
+    transition: filter 0.25s ease;
+    filter: brightness(0.65);
+}
+.overlay-nav-item:hover img,
+.overlay-nav-item.is-active img {
+    filter: brightness(1);
+}
+.overlay-nav-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: var(--mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.08em;
+    font-size: 0.55rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    line-height: 1.4;
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    padding: 4px;
+    text-align: center;
+    background: rgba(0,0,0,0.35);
 }
-.overlay-nav-subtitle {
-    font-family: var(--mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    opacity: 0.55;
-    line-height: 1.4;
+.overlay-nav-item:hover .overlay-nav-label,
+.overlay-nav-item.is-active .overlay-nav-label {
+    opacity: 1;
 }
-.overlay-nav-item:hover,
-.overlay-nav-item.is-active { color: var(--fg); }
-.overlay-nav-item.is-active .overlay-nav-subtitle { opacity: 0.75; }
 
 .overlay-main {
     flex: 1;
     min-width: 0;
     overflow-y: auto;
     height: 100%;
-    padding: 20px 0 0;
+    padding: calc(var(--header-h) + 20px) 0 0;
     -webkit-overflow-scrolling: touch;
 }
 
@@ -636,27 +686,27 @@ html.light-mode .overlay {
 }
 
 /* ── Scroll animations ───────────────────────────────── */
-.reveal {
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+@keyframes fade-up {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
+
+.reveal { opacity: 0; }
 
 .reveal.is-visible {
-    opacity: 1;
-    transform: translateY(0);
+    animation: fade-up 0.6s ease forwards;
 }
 
-.project-feed .project:nth-child(1)  { transition-delay: 0ms; }
-.project-feed .project:nth-child(2)  { transition-delay: 60ms; }
-.project-feed .project:nth-child(3)  { transition-delay: 120ms; }
-.project-feed .project:nth-child(4)  { transition-delay: 180ms; }
-.project-feed .project:nth-child(5)  { transition-delay: 240ms; }
-.project-feed .project:nth-child(6)  { transition-delay: 300ms; }
-.project-feed .project:nth-child(7)  { transition-delay: 360ms; }
-.project-feed .project:nth-child(8)  { transition-delay: 420ms; }
-.project-feed .project:nth-child(9)  { transition-delay: 480ms; }
-.project-feed .project:nth-child(10) { transition-delay: 540ms; }
+.project-feed .project:nth-child(1).is-visible  { animation-delay: 0ms; }
+.project-feed .project:nth-child(2).is-visible  { animation-delay: 60ms; }
+.project-feed .project:nth-child(3).is-visible  { animation-delay: 120ms; }
+.project-feed .project:nth-child(4).is-visible  { animation-delay: 180ms; }
+.project-feed .project:nth-child(5).is-visible  { animation-delay: 240ms; }
+.project-feed .project:nth-child(6).is-visible  { animation-delay: 300ms; }
+.project-feed .project:nth-child(7).is-visible  { animation-delay: 360ms; }
+.project-feed .project:nth-child(8).is-visible  { animation-delay: 420ms; }
+.project-feed .project:nth-child(9).is-visible  { animation-delay: 480ms; }
+.project-feed .project:nth-child(10).is-visible { animation-delay: 540ms; }
 
 /* ── Responsive ──────────────────────────────────────── */
 @media (max-width: 900px) {

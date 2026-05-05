@@ -60,7 +60,7 @@ themeToggle.addEventListener('click', () => {
 });
 
 // ========== SCROLL REVEAL ==========
-const revealElements = document.querySelectorAll('.project, .about-bio-col, .about-gear-accordion, .site-footer');
+const revealElements = document.querySelectorAll('.project');
 revealElements.forEach(el => el.classList.add('reveal'));
 
 const revealObserver = new IntersectionObserver((entries) => {

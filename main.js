@@ -24,28 +24,33 @@ checkStuck();
 const filterLinks = document.querySelectorAll('.filter-link');
 const projects = document.querySelectorAll('.project');
 
+function applyFilter(filter) {
+    projects.forEach(project => {
+        if (filter === 'all') {
+            if (project.hasAttribute('data-selected')) {
+                project.classList.remove('is-hidden');
+            } else {
+                project.classList.add('is-hidden');
+            }
+        } else if (project.dataset.category === filter) {
+            project.classList.remove('is-hidden');
+        } else {
+            project.classList.add('is-hidden');
+        }
+    });
+}
+
 filterLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
         filterLinks.forEach(l => l.classList.remove('active'));
         link.classList.add('active');
-
-        const filter = link.dataset.filter;
-        projects.forEach(project => {
-            if (filter === 'all') {
-                if (project.hasAttribute('data-selected')) {
-                    project.classList.remove('is-hidden');
-                } else {
-                    project.classList.add('is-hidden');
-                }
-            } else if (project.dataset.category === filter) {
-                project.classList.remove('is-hidden');
-            } else {
-                project.classList.add('is-hidden');
-            }
-        });
+        applyFilter(link.dataset.filter);
     });
 });
+
+// Apply default filter on load
+applyFilter('all');
 
 // ========== THEME TOGGLE ==========
 const themeToggle = document.getElementById('theme-toggle');
@@ -147,7 +152,17 @@ function buildOverlayNav(activeProject) {
         const btn = document.createElement('button');
         btn.className = 'overlay-nav-item';
         if (p === activeProject) btn.classList.add('is-active');
-        btn.textContent = p.dataset.title;
+
+        const top = document.createElement('span');
+        top.className = 'overlay-nav-title';
+        top.textContent = p.dataset.title.split('—')[0].trim();
+
+        const sub = document.createElement('span');
+        sub.className = 'overlay-nav-subtitle';
+        sub.textContent = p.dataset.subtitle || '';
+
+        btn.appendChild(top);
+        if (p.dataset.subtitle) btn.appendChild(sub);
         btn.addEventListener('click', () => openProject(p));
         overlayNav.appendChild(btn);
     });

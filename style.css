@@ -588,10 +588,21 @@ html.light-mode .icon-moon { display: block; }
 .overlay-main {
     flex: 1;
     min-width: 0;
-    overflow-y: auto;
     height: 100%;
-    padding: calc(var(--header-h) + 20px) 0 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.overlay-top {
+    flex-shrink: 0;
+    padding-top: calc(var(--header-h) + 20px);
+}
+
+.overlay-scroll {
+    flex: 1;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    min-height: 0;
 }
 
 .overlay-video-wrap {

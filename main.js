@@ -86,7 +86,8 @@ const overlayVideoWrap = document.getElementById('overlay-video-wrap');
 const overlayGallery = document.getElementById('overlay-gallery');
 const overlayNav = document.getElementById('overlay-nav');
 const overlayClose = document.getElementById('overlay-close');
-const overlayMain = document.getElementById('overlay-main');
+const overlayMain   = document.getElementById('overlay-main');
+const overlayScroll = overlayMain.querySelector('.overlay-scroll');
 
 const allProjects = Array.from(document.querySelectorAll('.project'));
 
@@ -123,9 +124,11 @@ function openProject(projectEl) {
         overlayVideoWrap.style.display = 'none';
     }
 
-    // Gallery — all stills
+    // Gallery — trim to nearest multiple of 3 so grid is always full
     overlayGallery.innerHTML = '';
-    stills.forEach(src => {
+    const cols = 3;
+    const trimmed = stills.slice(0, Math.floor(stills.length / cols) * cols || stills.length);
+    trimmed.forEach(src => {
         const img = document.createElement('img');
         img.src = src.trim();
         img.alt = title;
@@ -136,7 +139,7 @@ function openProject(projectEl) {
     // Sidebar nav — show projects matching current overlay filter
     buildOverlayNav(projectEl);
 
-    overlayMain.scrollTop = 0;
+    overlayScroll.scrollTop = 0;
     overlay.classList.add('is-open');
     const scrollY = window.scrollY;
     document.body.style.position = 'fixed';

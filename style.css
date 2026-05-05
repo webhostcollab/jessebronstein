@@ -456,120 +456,50 @@ html.light-mode .icon-moon { display: block; }
     justify-self: end;
 }
 
-.overlay-body {
+/* ── Overlay horizontal thumb bar ───────────────────── */
+.overlay-thumb-bar {
     display: flex;
-    flex: 1;
-    min-height: 0;
-}
-
-.overlay-sidebar {
-    width: calc(var(--gutter) + var(--sidebar-w));
-    flex-shrink: 0;
-    min-height: 0;
-    overflow-y: auto;
-    scrollbar-width: none;
-    padding: calc(var(--header-h) + 20px) var(--gutter) 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-.overlay-sidebar::-webkit-scrollbar { display: none; }
-
-/* ── Overlay filter dropdown ─────────────────────────── */
-.overlay-filter-nav {
-    position: relative;
-}
-
-.overlay-filter-toggle {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: var(--mono);
-    font-size: 0.58rem;
-    font-weight: 400;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--fg);
-    padding: 0;
-}
-.overlay-filter-plus {
-    font-size: 0.8rem;
-    font-weight: 300;
-    line-height: 1;
-    transition: transform 0.2s ease;
-    display: inline-block;
-}
-.overlay-filter-nav.is-open .overlay-filter-plus {
-    transform: rotate(45deg);
-}
-
-.overlay-filter-dropdown {
-    display: none;
-    flex-direction: column;
-    gap: 0;
-    padding-top: 8px;
-}
-.overlay-filter-nav.is-open .overlay-filter-dropdown {
-    display: flex;
-}
-
-.overlay-filter-item {
-    display: block;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: var(--mono);
-    font-size: 0.58rem;
-    font-weight: 300;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-align: left;
-    padding: 5px 0;
-    transition: color 0.2s;
-}
-.overlay-filter-item:hover { color: var(--fg); }
-.overlay-filter-item.active { display: none; } /* hide current in dropdown */
-
-/* ── Overlay thumbnail nav ───────────────────────────── */
-.overlay-nav {
-    display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 4px;
+    flex-shrink: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 8px var(--gutter);
+    background: var(--bg);
+    border-top: 1px solid var(--border);
 }
+.overlay-thumb-bar::-webkit-scrollbar { display: none; }
 
-.overlay-nav-item {
+.overlay-thumb-item {
     position: relative;
-    display: block;
+    flex-shrink: 0;
+    width: 120px;
+    cursor: pointer;
     background: none;
     border: none;
-    cursor: pointer;
     padding: 0;
     overflow: hidden;
 }
-.overlay-nav-item img {
+.overlay-thumb-item img {
     width: 100%;
     aspect-ratio: 3 / 2;
     object-fit: cover;
     display: block;
     transition: filter 0.25s ease;
-    filter: brightness(0.65);
+    filter: brightness(0.55);
 }
-.overlay-nav-item:hover img,
-.overlay-nav-item.is-active img {
+.overlay-thumb-item:hover img,
+.overlay-thumb-item.is-active img {
     filter: brightness(1);
 }
-.overlay-nav-label {
+.overlay-thumb-label {
     position: absolute;
     inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--mono);
-    font-size: 0.55rem;
+    font-size: 0.5rem;
     font-weight: 400;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -578,10 +508,10 @@ html.light-mode .icon-moon { display: block; }
     transition: opacity 0.25s ease;
     padding: 4px;
     text-align: center;
-    background: rgba(0,0,0,0.35);
+    background: rgba(0,0,0,0.4);
 }
-.overlay-nav-item:hover .overlay-nav-label,
-.overlay-nav-item.is-active .overlay-nav-label {
+.overlay-thumb-item:hover .overlay-thumb-label,
+.overlay-thumb-item.is-active .overlay-thumb-label {
     opacity: 1;
 }
 
@@ -598,6 +528,9 @@ html.light-mode .icon-moon { display: block; }
     flex-direction: column;
     gap: 4px;
     padding: 0 var(--gutter);
+    max-width: 860px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .overlay-video {
@@ -710,9 +643,9 @@ html.light-mode .overlay {
 /* ── Responsive ──────────────────────────────────────── */
 @media (max-width: 900px) {
     .about-section { grid-template-columns: 1fr; }
-    .overlay-sidebar { display: none; }
     .overlay-gallery { grid-template-columns: 1fr; }
     .header-center { font-size: 0.7rem; }
+    .overlay-thumb-item { width: 90px; }
 }
 @media (max-width: 768px) and (min-width: 581px) {
     .project-stills { grid-template-columns: repeat(2, 1fr); }

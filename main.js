@@ -135,7 +135,7 @@ function openProject(projectEl) {
         overlayGallery.appendChild(img);
     });
 
-    // Sidebar nav — show projects matching current overlay filter
+    // Bottom thumb bar
     buildOverlayNav(projectEl);
 
     overlayMain.scrollTop = 0;
@@ -149,15 +149,12 @@ function openProject(projectEl) {
 
 function buildOverlayNav(activeProject) {
     overlayNav.innerHTML = '';
-    const activeFilter = document.querySelector('.overlay-filter-item.active').dataset.filter;
     allProjects.forEach(p => {
-        const show = activeFilter === 'all'
-            ? p.hasAttribute('data-selected')
-            : p.dataset.category === activeFilter;
-        if (!show) return;
+        // Show selected projects only (same logic as main "all" filter)
+        if (!p.hasAttribute('data-selected')) return;
 
         const btn = document.createElement('button');
-        btn.className = 'overlay-nav-item';
+        btn.className = 'overlay-thumb-item';
         if (p === activeProject) btn.classList.add('is-active');
 
         // Hero 2 = second image in stills list
@@ -168,7 +165,7 @@ function buildOverlayNav(activeProject) {
         img.loading = 'lazy';
 
         const label = document.createElement('span');
-        label.className = 'overlay-nav-label';
+        label.className = 'overlay-thumb-label';
         label.textContent = p.dataset.title;
 
         btn.appendChild(img);
@@ -176,26 +173,13 @@ function buildOverlayNav(activeProject) {
         btn.addEventListener('click', () => openProject(p));
         overlayNav.appendChild(btn);
     });
+
+    // Scroll active thumb into view
+    if (activeProject) {
+        const activeBtn = overlayNav.querySelector('.is-active');
+        if (activeBtn) activeBtn.scrollIntoView({ inline: 'center', block: 'nearest' });
+    }
 }
-
-// Overlay filter dropdown
-const filterNav      = document.getElementById('overlay-filters');
-const filterToggle   = document.getElementById('overlay-filter-toggle');
-const filterLabel    = document.getElementById('overlay-filter-label');
-
-filterToggle.addEventListener('click', () => {
-    filterNav.classList.toggle('is-open');
-});
-
-document.querySelectorAll('.overlay-filter-item').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.overlay-filter-item').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        filterLabel.textContent = btn.textContent;
-        filterNav.classList.remove('is-open');
-        buildOverlayNav(null);
-    });
-});
 
 document.querySelectorAll('.project-stills').forEach(stills => {
     stills.addEventListener('click', () => {

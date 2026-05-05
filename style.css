@@ -588,21 +588,9 @@ html.light-mode .icon-moon { display: block; }
 .overlay-main {
     flex: 1;
     min-width: 0;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-.overlay-top {
-    flex-shrink: 0;
-    padding-top: calc(var(--header-h) + 20px);
-}
-
-.overlay-scroll {
-    flex: 1;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    min-height: 0;
+    padding-top: calc(var(--header-h) + 20px);
 }
 
 .overlay-video-wrap {
@@ -628,7 +616,11 @@ html.light-mode .icon-moon { display: block; }
 }
 
 .overlay-bar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
     padding: 16px var(--gutter);
+    background: var(--bg);
     border-bottom: 1px solid var(--border);
 }
 

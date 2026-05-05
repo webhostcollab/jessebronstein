@@ -86,8 +86,7 @@ const overlayVideoWrap = document.getElementById('overlay-video-wrap');
 const overlayGallery = document.getElementById('overlay-gallery');
 const overlayNav = document.getElementById('overlay-nav');
 const overlayClose = document.getElementById('overlay-close');
-const overlayMain   = document.getElementById('overlay-main');
-const overlayScroll = overlayMain.querySelector('.overlay-scroll');
+const overlayMain = document.getElementById('overlay-main');
 
 const allProjects = Array.from(document.querySelectorAll('.project'));
 
@@ -139,7 +138,7 @@ function openProject(projectEl) {
     // Sidebar nav — show projects matching current overlay filter
     buildOverlayNav(projectEl);
 
-    overlayScroll.scrollTop = 0;
+    overlayMain.scrollTop = 0;
     overlay.classList.add('is-open');
     const scrollY = window.scrollY;
     document.body.style.position = 'fixed';

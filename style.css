@@ -456,24 +456,54 @@ html.light-mode .icon-moon { display: block; }
     justify-self: end;
 }
 
+/* ── Overlay player row (video + prev/next) ──────────── */
+.overlay-player-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 0 var(--gutter);
+}
+
+.overlay-prev,
+.overlay-next {
+    flex-shrink: 0;
+    width: var(--gutter);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    writing-mode: vertical-rl;
+    padding: 12px 0;
+    transition: opacity 0.2s;
+    opacity: 0.5;
+    user-select: none;
+}
+.overlay-prev { transform: rotate(180deg); }
+.overlay-prev:hover,
+.overlay-next:hover { opacity: 1; }
+.overlay-prev:disabled,
+.overlay-next:disabled { opacity: 0.15; cursor: default; }
+
 /* ── Overlay horizontal thumb bar ───────────────────── */
 .overlay-thumb-bar {
     display: flex;
     flex-direction: row;
     gap: 4px;
-    flex-shrink: 0;
     overflow-x: auto;
     scrollbar-width: none;
-    padding: 8px var(--gutter);
-    background: var(--bg);
-    border-top: 1px solid var(--border);
+    padding: var(--gutter);
 }
 .overlay-thumb-bar::-webkit-scrollbar { display: none; }
 
 .overlay-thumb-item {
     position: relative;
     flex-shrink: 0;
-    width: 120px;
+    width: 200px;
     cursor: pointer;
     background: none;
     border: none;
@@ -499,7 +529,7 @@ html.light-mode .icon-moon { display: block; }
     align-items: center;
     justify-content: center;
     font-family: var(--mono);
-    font-size: 0.5rem;
+    font-size: 0.55rem;
     font-weight: 400;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -527,10 +557,10 @@ html.light-mode .icon-moon { display: block; }
     display: flex;
     flex-direction: column;
     gap: 4px;
-    padding: 0 var(--gutter);
+    flex: 1;
+    min-width: 0;
     max-width: 860px;
     margin: 0 auto;
-    width: 100%;
 }
 
 .overlay-video {
@@ -549,7 +579,8 @@ html.light-mode .icon-moon { display: block; }
 }
 
 .overlay-bar {
-    padding: 16px var(--gutter);
+    padding: 12px var(--gutter) 20px;
+    text-align: center;
     border-bottom: 1px solid var(--border);
 }
 

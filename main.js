@@ -87,10 +87,22 @@ const overlayGallery = document.getElementById('overlay-gallery');
 const overlayNav = document.getElementById('overlay-nav');
 const overlayClose = document.getElementById('overlay-close');
 const overlayMain = document.getElementById('overlay-main');
+const overlayPrev = document.getElementById('overlay-prev');
+const overlayNext = document.getElementById('overlay-next');
 
 const allProjects = Array.from(document.querySelectorAll('.project'));
+let currentProject = null;
+
+function getVisibleProjects() {
+    return allProjects.filter(p => p.hasAttribute('data-selected'));
+}
 
 function openProject(projectEl) {
+    currentProject = projectEl;
+    const visible = getVisibleProjects();
+    const idx = visible.indexOf(projectEl);
+    overlayPrev.disabled = idx <= 0;
+    overlayNext.disabled = idx >= visible.length - 1;
     const title = projectEl.dataset.title;
     const vimeoId = projectEl.dataset.vimeo;
     const vimeoHash = projectEl.dataset.vimeoHash || '';
@@ -197,6 +209,18 @@ function closeOverlay() {
     overlayVideo.innerHTML = '';
     document.querySelectorAll('.overlay-video-extra').forEach(el => el.remove());
 }
+
+overlayPrev.addEventListener('click', () => {
+    const visible = getVisibleProjects();
+    const idx = visible.indexOf(currentProject);
+    if (idx > 0) openProject(visible[idx - 1]);
+});
+
+overlayNext.addEventListener('click', () => {
+    const visible = getVisibleProjects();
+    const idx = visible.indexOf(currentProject);
+    if (idx < visible.length - 1) openProject(visible[idx + 1]);
+});
 
 overlayClose.addEventListener('click', closeOverlay);
 

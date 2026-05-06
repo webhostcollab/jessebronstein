@@ -87,22 +87,10 @@ const overlayGallery = document.getElementById('overlay-gallery');
 const overlayNav = document.getElementById('overlay-nav');
 const overlayClose = document.getElementById('overlay-close');
 const overlayMain = document.getElementById('overlay-main');
-const overlayPrev = document.getElementById('overlay-prev');
-const overlayNext = document.getElementById('overlay-next');
 
 const allProjects = Array.from(document.querySelectorAll('.project'));
-let currentProject = null;
-
-function getVisibleProjects() {
-    return allProjects.filter(p => p.hasAttribute('data-selected'));
-}
 
 function openProject(projectEl) {
-    currentProject = projectEl;
-    const visible = getVisibleProjects();
-    const idx = visible.indexOf(projectEl);
-    overlayPrev.disabled = idx <= 0;
-    overlayNext.disabled = idx >= visible.length - 1;
     const title = projectEl.dataset.title;
     const vimeoId = projectEl.dataset.vimeo;
     const vimeoHash = projectEl.dataset.vimeoHash || '';
@@ -147,7 +135,7 @@ function openProject(projectEl) {
         overlayGallery.appendChild(img);
     });
 
-    // Bottom thumb bar
+    // Sidebar nav — show projects matching current overlay filter
     buildOverlayNav(projectEl);
 
     overlayMain.scrollTop = 0;
@@ -161,12 +149,15 @@ function openProject(projectEl) {
 
 function buildOverlayNav(activeProject) {
     overlayNav.innerHTML = '';
+    const activeFilter = document.querySelector('.overlay-filter-item.active').dataset.filter;
     allProjects.forEach(p => {
-        // Show selected projects only (same logic as main "all" filter)
-        if (!p.hasAttribute('data-selected')) return;
+        const show = activeFilter === 'all'
+            ? p.hasAttribute('data-selected')
+            : p.dataset.category === activeFilter;
+        if (!show) return;
 
         const btn = document.createElement('button');
-        btn.className = 'overlay-thumb-item';
+        btn.className = 'overlay-nav-item';
         if (p === activeProject) btn.classList.add('is-active');
 
         // Hero 2 = second image in stills list
@@ -177,7 +168,7 @@ function buildOverlayNav(activeProject) {
         img.loading = 'lazy';
 
         const label = document.createElement('span');
-        label.className = 'overlay-thumb-label';
+        label.className = 'overlay-nav-label';
         label.textContent = p.dataset.title;
 
         btn.appendChild(img);
@@ -185,13 +176,26 @@ function buildOverlayNav(activeProject) {
         btn.addEventListener('click', () => openProject(p));
         overlayNav.appendChild(btn);
     });
-
-    // Scroll active thumb into view
-    if (activeProject) {
-        const activeBtn = overlayNav.querySelector('.is-active');
-        if (activeBtn) activeBtn.scrollIntoView({ inline: 'center', block: 'nearest' });
-    }
 }
+
+// Overlay filter dropdown
+const filterNav    = document.getElementById('overlay-filters');
+const filterToggle = document.getElementById('overlay-filter-toggle');
+const filterLabel  = document.getElementById('overlay-filter-label');
+
+filterToggle.addEventListener('click', () => {
+    filterNav.classList.toggle('is-open');
+});
+
+document.querySelectorAll('.overlay-filter-item').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.overlay-filter-item').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        filterLabel.textContent = btn.textContent;
+        filterNav.classList.remove('is-open');
+        buildOverlayNav(null);
+    });
+});
 
 document.querySelectorAll('.project-stills').forEach(stills => {
     stills.addEventListener('click', () => {
@@ -209,18 +213,6 @@ function closeOverlay() {
     overlayVideo.innerHTML = '';
     document.querySelectorAll('.overlay-video-extra').forEach(el => el.remove());
 }
-
-overlayPrev.addEventListener('click', () => {
-    const visible = getVisibleProjects();
-    const idx = visible.indexOf(currentProject);
-    if (idx > 0) openProject(visible[idx - 1]);
-});
-
-overlayNext.addEventListener('click', () => {
-    const visible = getVisibleProjects();
-    const idx = visible.indexOf(currentProject);
-    if (idx < visible.length - 1) openProject(visible[idx + 1]);
-});
 
 overlayClose.addEventListener('click', closeOverlay);
 

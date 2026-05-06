@@ -292,20 +292,32 @@
             </div>
             <a class="overlay-header-side overlay-header-right" href="#about" id="overlay-info">Info</a>
         </div>
-        <div class="overlay-main" id="overlay-main">
-            <div class="overlay-player-row">
-                <button class="overlay-prev" id="overlay-prev">Prev</button>
+        <div class="overlay-body">
+            <div class="overlay-sidebar">
+                <div class="overlay-filter-nav" id="overlay-filters">
+                    <button class="overlay-filter-toggle" id="overlay-filter-toggle">
+                        <span id="overlay-filter-label">Selected</span>
+                        <span class="overlay-filter-plus" id="overlay-filter-plus">+</span>
+                    </button>
+                    <div class="overlay-filter-dropdown" id="overlay-filter-dropdown">
+                        <button class="overlay-filter-item active" data-filter="all">Selected</button>
+                        <button class="overlay-filter-item" data-filter="commercial">Commercial</button>
+                        <button class="overlay-filter-item" data-filter="narrative">Narrative</button>
+                        <button class="overlay-filter-item" data-filter="music-video">Music Video</button>
+                    </div>
+                </div>
+                <div class="overlay-nav" id="overlay-nav"></div>
+            </div>
+            <div class="overlay-main" id="overlay-main">
                 <div class="overlay-video-wrap" id="overlay-video-wrap">
                     <div class="overlay-video" id="overlay-video"></div>
                 </div>
-                <button class="overlay-next" id="overlay-next">Next</button>
+                <div class="overlay-bar">
+                    <span class="overlay-title" id="overlay-title"></span>
+                </div>
+                <div class="overlay-gallery" id="overlay-gallery"></div>
+                <div class="overlay-bottom-pad"></div>
             </div>
-            <div class="overlay-bar">
-                <span class="overlay-title" id="overlay-title"></span>
-            </div>
-            <div class="overlay-gallery" id="overlay-gallery"></div>
-            <div class="overlay-thumb-bar" id="overlay-nav"></div>
-            <div class="overlay-bottom-pad"></div>
         </div>
     </div>
 

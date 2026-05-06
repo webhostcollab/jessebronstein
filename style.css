@@ -456,73 +456,113 @@ html.light-mode .icon-moon { display: block; }
     justify-self: end;
 }
 
-/* ── Overlay player row (video + prev/next) ──────────── */
-.overlay-player-row {
+.overlay-body {
     display: flex;
-    align-items: center;
-    gap: 0;
-    padding: 0 var(--gutter);
+    flex: 1;
+    min-height: 0;
 }
 
-.overlay-prev,
-.overlay-next {
+.overlay-sidebar {
+    width: calc(var(--gutter) + var(--sidebar-w));
     flex-shrink: 0;
-    width: var(--gutter);
+    min-height: 0;
+    overflow-y: auto;
+    scrollbar-width: none;
+    padding: calc(var(--header-h) + 20px) var(--gutter) 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.overlay-sidebar::-webkit-scrollbar { display: none; }
+
+/* ── Overlay filter dropdown ─────────────────────────── */
+.overlay-filter-nav {
+    position: relative;
+}
+
+.overlay-filter-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg);
+    padding: 0;
+}
+.overlay-filter-plus {
+    font-size: 0.8rem;
+    font-weight: 300;
+    line-height: 1;
+    transition: transform 0.2s ease;
+    display: inline-block;
+}
+.overlay-filter-nav.is-open .overlay-filter-plus {
+    transform: rotate(45deg);
+}
+
+.overlay-filter-dropdown {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    padding-top: 8px;
+}
+.overlay-filter-nav.is-open .overlay-filter-dropdown {
+    display: flex;
+}
+
+.overlay-filter-item {
+    display: block;
     background: none;
     border: none;
     cursor: pointer;
     font-family: var(--mono);
     font-size: 0.58rem;
     font-weight: 300;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #fff;
-    writing-mode: vertical-rl;
-    padding: 12px 0;
-    transition: opacity 0.2s;
-    opacity: 0.5;
-    user-select: none;
+    color: var(--muted);
+    text-align: left;
+    padding: 5px 0;
+    transition: color 0.2s;
 }
-.overlay-prev { transform: rotate(180deg); }
-.overlay-prev:hover,
-.overlay-next:hover { opacity: 1; }
-.overlay-prev:disabled,
-.overlay-next:disabled { opacity: 0.15; cursor: default; }
+.overlay-filter-item:hover { color: var(--fg); }
+.overlay-filter-item.active { display: none; }
 
-/* ── Overlay horizontal thumb bar ───────────────────── */
-.overlay-thumb-bar {
+/* ── Overlay thumbnail nav ───────────────────────────── */
+.overlay-nav {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 4px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    padding: var(--gutter);
 }
-.overlay-thumb-bar::-webkit-scrollbar { display: none; }
 
-.overlay-thumb-item {
+.overlay-nav-item {
     position: relative;
-    flex-shrink: 0;
-    width: 200px;
-    cursor: pointer;
+    display: block;
     background: none;
     border: none;
+    cursor: pointer;
     padding: 0;
     overflow: hidden;
 }
-.overlay-thumb-item img {
+.overlay-nav-item img {
     width: 100%;
     aspect-ratio: 3 / 2;
     object-fit: cover;
     display: block;
     transition: filter 0.25s ease;
-    filter: brightness(0.55);
+    filter: brightness(0.65);
 }
-.overlay-thumb-item:hover img,
-.overlay-thumb-item.is-active img {
+.overlay-nav-item:hover img,
+.overlay-nav-item.is-active img {
     filter: brightness(1);
 }
-.overlay-thumb-label {
+.overlay-nav-label {
     position: absolute;
     inset: 0;
     display: flex;
@@ -538,10 +578,10 @@ html.light-mode .icon-moon { display: block; }
     transition: opacity 0.25s ease;
     padding: 4px;
     text-align: center;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.35);
 }
-.overlay-thumb-item:hover .overlay-thumb-label,
-.overlay-thumb-item.is-active .overlay-thumb-label {
+.overlay-nav-item:hover .overlay-nav-label,
+.overlay-nav-item.is-active .overlay-nav-label {
     opacity: 1;
 }
 
@@ -557,10 +597,7 @@ html.light-mode .icon-moon { display: block; }
     display: flex;
     flex-direction: column;
     gap: 4px;
-    flex: 1;
-    min-width: 0;
-    max-width: 860px;
-    margin: 0 auto;
+    padding: 0 var(--gutter);
 }
 
 .overlay-video {
@@ -579,8 +616,7 @@ html.light-mode .icon-moon { display: block; }
 }
 
 .overlay-bar {
-    padding: 12px var(--gutter) 20px;
-    text-align: center;
+    padding: 16px var(--gutter);
     border-bottom: 1px solid var(--border);
 }
 
@@ -674,9 +710,9 @@ html.light-mode .overlay {
 /* ── Responsive ──────────────────────────────────────── */
 @media (max-width: 900px) {
     .about-section { grid-template-columns: 1fr; }
+    .overlay-sidebar { display: none; }
     .overlay-gallery { grid-template-columns: 1fr; }
     .header-center { font-size: 0.7rem; }
-    .overlay-thumb-item { width: 90px; }
 }
 @media (max-width: 768px) and (min-width: 581px) {
     .project-stills { grid-template-columns: repeat(2, 1fr); }

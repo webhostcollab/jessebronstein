@@ -538,7 +538,7 @@ html.light-mode .icon-moon { display: block; }
 .overlay-nav {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 12px;
 }
 
 .overlay-nav-item {
@@ -596,7 +596,7 @@ html.light-mode .icon-moon { display: block; }
 .overlay-video-wrap {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 12px;
     padding: 0 var(--gutter);
 }
 
@@ -632,7 +632,7 @@ html.light-mode .icon-moon { display: block; }
 .overlay-gallery {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 4px;
+    gap: 12px;
     padding: var(--gutter);
 }
 

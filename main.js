@@ -241,3 +241,67 @@ document.addEventListener('keydown', (e) => {
         overlayClose.click();
     }
 });
+
+// ========== LIGHTBOX ==========
+const lightbox      = document.getElementById('lightbox');
+const lightboxImg   = document.getElementById('lightbox-img');
+const lightboxClose = document.getElementById('lightbox-close');
+const lightboxPrev  = document.getElementById('lightbox-prev');
+const lightboxNext  = document.getElementById('lightbox-next');
+const lightboxCounter = document.getElementById('lightbox-counter');
+
+let lightboxImages = [];
+let lightboxIndex  = 0;
+
+function openLightbox(imgs, startIndex) {
+    lightboxImages = imgs;
+    lightboxIndex  = startIndex;
+    showLightboxImage();
+    lightbox.classList.add('is-open');
+    lightbox.setAttribute('aria-hidden', 'false');
+}
+
+function showLightboxImage() {
+    lightboxImg.src = lightboxImages[lightboxIndex];
+    lightboxCounter.textContent = `${lightboxIndex + 1} / ${lightboxImages.length}`;
+    lightboxPrev.style.visibility = lightboxImages.length > 1 ? '' : 'hidden';
+    lightboxNext.style.visibility = lightboxImages.length > 1 ? '' : 'hidden';
+}
+
+function closeLightbox() {
+    lightbox.classList.remove('is-open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    lightboxImg.src = '';
+}
+
+lightboxClose.addEventListener('click', closeLightbox);
+
+lightboxPrev.addEventListener('click', () => {
+    lightboxIndex = (lightboxIndex - 1 + lightboxImages.length) % lightboxImages.length;
+    showLightboxImage();
+});
+
+lightboxNext.addEventListener('click', () => {
+    lightboxIndex = (lightboxIndex + 1) % lightboxImages.length;
+    showLightboxImage();
+});
+
+lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target === lightboxImg) closeLightbox();
+});
+
+document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('is-open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') { lightboxIndex = (lightboxIndex - 1 + lightboxImages.length) % lightboxImages.length; showLightboxImage(); }
+    if (e.key === 'ArrowRight') { lightboxIndex = (lightboxIndex + 1) % lightboxImages.length; showLightboxImage(); }
+});
+
+// Wire up gallery clicks — delegated so it works after openProject() rebuilds the gallery
+overlayGallery.addEventListener('click', (e) => {
+    const img = e.target.closest('img');
+    if (!img) return;
+    const imgs = Array.from(overlayGallery.querySelectorAll('img')).map(i => i.src);
+    const idx  = Array.from(overlayGallery.querySelectorAll('img')).indexOf(img);
+    openLightbox(imgs, idx);
+});

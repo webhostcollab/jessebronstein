@@ -245,7 +245,7 @@ html.light-mode .icon-moon { display: block; }
 
 .about-section-heading {
     font-family: var(--mono);
-    font-size: 0.62rem;
+    font-size: 0.75rem;
     font-weight: 400;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -810,4 +810,4 @@ html.light-mode .overlay {
     opacity: 0.4;
     font-family: var(--mono);
 }
-.overlay-gallery img { cursor: zoom-in; }
+.overlay-gallery img { cursor: pointer; }

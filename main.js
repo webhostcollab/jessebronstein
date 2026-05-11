@@ -135,13 +135,15 @@ function openProject(projectEl) {
         overlayGallery.appendChild(img);
     });
 
-    // Sync overlay filter to active main-feed filter
-    const activeMainFilter = document.querySelector('.filter-link.active')?.dataset.filter || 'all';
-    document.querySelectorAll('.overlay-filter-item').forEach(b => b.classList.remove('active'));
-    const matchingOverlayFilter = document.querySelector(`.overlay-filter-item[data-filter="${activeMainFilter}"]`);
-    if (matchingOverlayFilter) {
-        matchingOverlayFilter.classList.add('active');
-        filterLabel.textContent = matchingOverlayFilter.textContent;
+    // Sync overlay filter to main feed only on first open (not when navigating within overlay)
+    if (!overlay.classList.contains('is-open')) {
+        const activeMainFilter = document.querySelector('.filter-link.active')?.dataset.filter || 'all';
+        document.querySelectorAll('.overlay-filter-item').forEach(b => b.classList.remove('active'));
+        const matchingOverlayFilter = document.querySelector(`.overlay-filter-item[data-filter="${activeMainFilter}"]`);
+        if (matchingOverlayFilter) {
+            matchingOverlayFilter.classList.add('active');
+            filterLabel.textContent = matchingOverlayFilter.textContent;
+        }
     }
 
     // Sidebar nav — show projects matching current overlay filter
